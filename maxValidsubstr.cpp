@@ -7,7 +7,7 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
 	stack <int> stk;
-	int max_len,substr_count = 0;
+	int max_len,substr_count = 0, count = 0;
 	string str;
 	bool is_valid = false;
 	max_len = 0;
@@ -25,26 +25,22 @@ int main(int argc, char const *argv[])
 			
 			case ')':	if(!stk.empty()){
 
-							temp = stk.top();
+							int temp = stk.top();
 							if(temp != -1) {
-
-								if(!is_valid){
-									is_valid = true;
-									substr_count++;
-								}
-								max_len = max(max_len, i - temp + 1);
+								count += 2;
+								max_len = max(max_len,count); 
 								stk.pop();
 							}
 							else {
 								stk.pop();
-								is_valid = false;
-									
+								count = 0;
 							}
-						}	
+						}
+						break;	
 		}
 	}
 
-	cout << max_len << " " << substr_count << endl;
+	cout << max_len  << endl;
 
 	return 0;
 }
